@@ -1,0 +1,448 @@
+
+body {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #004225;
+    color: #495057;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px; /* Tamaño base para escritorio */
+}
+
+.btn {
+    margin-top: 10px; /* Espacio adicional encima de los botones */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombras en botones para consistencia */
+}
+
+canvas {
+    border: 1px solid var(--secondary-color);
+    animation: fadeIn 1s ease-out;
+}
+
+
+/* Estilos para las listas de respuestas correctas */
+#correctAnswers ul {
+    padding: 15px;
+    list-style: none; /* Eliminar los estilos predeterminados de lista */
+    margin: 0; /* Remover márgenes predeterminados */
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Sombra interior suave */
+}
+
+/* Estilos para la sección grande de resultados */
+#SeccionGrande1 {
+    display: flex;
+    flex-direction: row; /* Asegura que el contenido esté en fila en pantallas anchas */
+    align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    flex-wrap: wrap; /* Permite el ajuste de los elementos en pantalla más pequeñas */
+    max-width: 1500px; /* Un máximo ancho para evitar que las secciones sean demasiado anchas en pantallas grandes */
+    margin-top: 10px; /* Centra las secciones horizontalmente */
+    margin-left: 15%;
+    margin-right: 15%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Estilos generales para secciones con títulos */
+#SeccionTitulo, #RespuestasSeccion {
+    text-align: center;
+    width: 100%;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px auto; /* Centra las secciones */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Una sombra suave para dar profundidad */
+    max-width: 1200px; /* Un máximo ancho para evitar que las secciones sean demasiado anchas en pantallas grandes */
+}
+
+/* Estilos para los divs dentro de la sección grande */
+#div1_1, #div1_2 {
+    padding: 20px;
+    margin: 10px; /* Espacio entre los divs */
+    min-height: 100px; /* Establece una altura mínima para cada div para evitar el colapso */
+}
+
+#div1_1 {
+    margin-left: 10%;
+}
+
+#radarChart {
+    width: 100%;
+    max-width: 500px;  /* Limita el tamaño máximo */
+    height: auto;      /* Mantiene la proporción basada en el ancho */
+    margin: auto;      /* Centra horizontalmente */
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.1);
+    position: relative;  /* Para el posicionamiento z-index */
+    z-index: 20;          /* Mayor visibilidad sobre otros elementos */
+}
+
+.badge {
+    background-color: var(--primary-color);
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilos responsivos */
+@media (min-width: 992px) {
+    body {
+        font-size: 18px; /* Tamaño de fuente más grande para escritorios grandes */
+    }
+    #radarChart {
+        max-width: 500px;
+        height: 500px;
+    }
+    #SeccionGrande1 {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    body {
+        font-size: 16px; /* Tamaño de fuente estándar para tabletas */
+    }
+    #radarChart {
+        max-width: 450px;
+        height: 450px;
+    }
+    #SeccionGrande1 {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    body {
+        font-size: 14px; /* Tamaño de fuente reducido para mejorar la legibilidad en dispositivos pequeños */
+    }
+    #radarChart {
+        max-width: 400px;
+        height: 400px;
+    }
+    #SeccionGrande1 {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 575px) {
+    body {
+        font-size: 12px; /* Tamaño de fuente aún más pequeño para teléfonos en posición portrait */
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-size: calc(1.375rem + 1vw); /* Escalado dinámico de títulos basado en el ancho de la vista */
+    }
+    #radarChart {
+        width: 100%;
+        max-width: 350px;
+        height: 350px;
+    }
+    #SeccionGrande1 {
+        flex-direction: column;
+    }
+    body, #SeccionTitulo, #SeccionGrande1, #RespuestasSeccion {
+        padding: 10px; /* Reduce el padding en pantallas más pequeñas */
+    }
+}
+
+/* Animaciones para la revelación de respuestas */
+.answerReveal {
+    opacity: 1;  /* Estado inicial visible */
+    transform: translateX(0);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.hiddenAnswer {
+    opacity: 0 !important;
+    transform: translateX(20px) !important;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+#correctAnswers h5 {
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+/* Respuestas correctas e incorrectas */
+.correctAnswer {
+    color: green; /* Verde para respuestas correctas */
+}
+
+.incorrectAnswer {
+    color: red; /* Rojo para respuestas incorrectas */
+}
+
+/* Estilo general para el contenedor de respuestas */
+.selected-answers {
+    list-style: none;
+    margin-top: 10px;
+    padding-left: 20px;
+    max-height: 0;  /* Inicialmente no tiene altura */
+    overflow: hidden;  /* Evita que el contenido desborde durante la transición */
+    transition: max-height 0.5s ease-in-out; /* Suaviza la transición de la altura */
+}
+
+/* Cuando el contenedor está 'abierto' */
+.selected-answers.show {
+    max-height: 300px; /* Ajusta según el máximo contenido esperado */
+}
+
+/* Transiciones suaves para los elementos li */
+.selected-answers li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Estado visible de los elementos li */
+.selected-answers.show li {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s; /* Retrasa la transición para que coincida con la del contenedor */
+}
+
+/* Estilos para botones circulares */
+.btn-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-circle:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+}
+.list-group-item .badge {
+    margin-top: 10px;  /* Espacio desde la parte superior */
+    margin-left: 10px;  /* Espacio desde la izquierda */
+}
+
+.btn-sm {
+    margin-right: 10px; /* Espacio entre el botón y el texto de la categoría */
+}
+
+/* Estilos para las tarjetas */
+.cards-container {
+    display: flex;
+    justify-content: space-between; /* Esto distribuirá el espacio uniformemente alrededor de cada tarjeta */
+    align-items: center; /* Esto alineará las tarjetas verticalmente en el centro */
+    flex-wrap: nowrap; /* Evitará que las tarjetas se envuelvan en múltiples líneas */
+    padding: 20px; /* Agrega algo de padding alrededor de las tarjetas */
+}
+  
+.card {
+    width: 190px;
+    height: 254px;
+    border-radius: 20px;
+    background: #d4d0d0;
+    position: relative;
+    padding: 1.8rem;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+}
+  
+.card-details {
+    color: black;
+    height: 100%;
+    gap: .5em;
+    display: grid;
+    place-content: center;
+}
+  
+.card-button {
+    display: block; /* Asegura que el enlace funcione como un bloque para facilitar la interacción */
+    text-align: center;
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #008bf8;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+  
+.card-button:hover {
+    background-color: #005f9e; /* Cambio de color al pasar el ratón */
+    cursor: pointer;
+    transform: translate(-50%, 50%); /* Mueve el botón más arriba al hacer hover */
+    opacity: 1;
+}
+  
+.text-body {
+    color: rgb(134, 134, 134);
+}
+  
+.text-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+  
+.card:hover {
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+  
+.card:hover .card-button {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+}
+
+/* Colores específicos para el borde de cada concepto cuando se hace hover */
+.card[data-target="mando-control"]:hover {
+    border-color: #FF0000; /* Rojo */
+}
+
+.card[data-target="situacion"]:hover {
+    border-color: #0000FF; /* Azul */
+}
+
+.card[data-target="decision"]:hover {
+    border-color: #00FF00; /* Verde */
+}
+
+.card[data-target="comunicacion"]:hover {
+    border-color: #FFFF00; /* Amarillo */
+}
+
+  
+.intro-section p {
+    color: rgb(230, 228, 228);
+}
+
+.form-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.form-section.active {
+    display: block;
+    opacity: 1;
+    height: auto;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Contenedor de la barra de progreso */
+.progress-container {
+    width: 80%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 3px 3px -5px #000000, 0 2px 5px #aaaaaa;
+    margin: 20px 0;
+}
+
+/* Barra de progreso */
+.progress-bar {
+    height: 30px;
+    background: linear-gradient(270deg, rgba(253,187,45,1), rgba(34,193,195,1) 50%, rgba(118,199,192,1));
+    background-size: 200% 100%;  /* Ajusta el tamaño del fondo */
+    animation: shine 3s linear infinite;
+    transition: width 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 25px 0 0 25px;
+}
+
+/* Animación de brillo continua */
+@keyframes shine {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: 0% 0;
+    }
+}
+
+/* Spinner */
+#spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: #007bff;
+    margin-top: 20px;
+}
+
+/* Contenedor centrado */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Centra el texto */
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite;
+}
+
+.loader::before, .loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #004225;
+    animation: prixClipFix 2s linear infinite;
+}
+
+.loader::after {
+    inset: 8px;
+    transform: rotate3d(90, 90, 0, 180deg);
+    border-color: #f53d1c; /* Color verde de la Guardia Civil */
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes prixClipFix {
+    0% { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); }
+    50% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
+    75%, 100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
+}
