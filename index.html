@@ -160,12 +160,13 @@
     <br>
     <div class="center-container">
         <div class="text-center d-flex justify-content-center">
-            <button type="button" class="btn btn-danger mx-2" id="consolidateButton" style="display: none;"
-                onclick="validatePassword()">Corregir Evaluación</button>
             <button type="button" class="btn btn-info mx-2" id="showAnswersButton" style="display: none;"
                 onclick="toggleSelectedAnswersDisplay()">Mostrar respuestas</button>
             <button type="button" class="btn btn-success mx-2" id="printAnswersButton" style="display: none;"
                 onclick="printAnswers()">Imprimir Respuestas</button>
+            <button type="button" class="btn btn-danger mx-2" id="consolidateButton" style="display: none;"
+                onclick="validatePassword()">Corregir Evaluación</button>
+            <button type="button" class="btn btn-outline-success" onclick="printReport()">Imprimir Informe</button>
         </div>
         <div id="spinner" class="loader" style="display: none;"></div>
     </div>
@@ -235,10 +236,6 @@
         <canvas id="radarChart" width="400" height="400"></canvas>
     </div>
 
-    <!-- Botón para imprimir informe -->
-    <div class="text-center my-4">
-        <button type="button" class="btn btn-outline-success" onclick="printReport()">Imprimir Informe</button>
-    </div>
 
     <!-- Scripts JS -->
     <script>

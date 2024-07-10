@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     consolidateButton.style.display = 'block';
                     showAnswersButton.style.display = 'block';
                     printAnswersButton.style.display = 'block';
+                    printReportButton.style.display = 'block'; // Mostrar el botón de imprimir informe
                 }, 1000);
             }
         });
@@ -48,11 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Mostrar el contenedor del gráfico de radar después de 3.5 segundos
+        // Mostrar el contenedor del gráfico de radar después de 2.5 segundos
         setTimeout(() => {
             spinner.style.display = 'none';
             resultsSection.style.display = 'block';
-        }, 3500);
+        }, 2500);
     });
 
     showChartButton.addEventListener("click", function () {
@@ -61,18 +62,16 @@ document.addEventListener("DOMContentLoaded", function () {
         showChartButton.style.display = 'none';
     });
 
-    function printAnswers() {
-        // Lógica para imprimir respuestas
-    }
-
 });
 
 function validatePassword() {
-    const password = prompt("Ingrese la contraseña para corregir la evaluación:");
+    const password = prompt("Por favor, introduce la contraseña:");
     if (password === "CUGC") {
-        showRadarChart();
+        alert("Contraseña correcta. Procediendo a corregir la evaluación...");
+        correctEvaluation();
+    
     } else {
-        alert("Contraseña incorrecta. Inténtelo de nuevo.");
+        alert("Contraseña incorrecta. Inténtalo de nuevo.");
     }
 }
 function toggleSelectedAnswersDisplay() {

@@ -61,7 +61,7 @@ function printReport() {
     printWindow.document.write('</style>');
     printWindow.document.write('</head><body>');
 
-    printWindow.document.write('<h1>Informe de Evaluación</h1>');
+    printWindow.document.write('<h1>Informe de Evaluación Equipo 1</h1>');
     printWindow.document.write('<h2>Resultados de la práctica</h2>');
 
     // Obtener la imagen del gráfico de radar
@@ -104,6 +104,9 @@ function printReport() {
         const score = (correctCount / correctAnswers[section].length) * 100;
         printWindow.document.write('<p><b>Porcentaje de Idoneidad: ' + score.toFixed(2) + '%</b></p>');
     });
+
+    const totalSuitability = calculateTotalSuitability();
+    printWindow.document.write('<h3><b>Idoneidad Total: ' + totalSuitability.toFixed(2) + '%</b></h3>');
 
     printWindow.document.write('</body></html>');
     printWindow.document.close();
