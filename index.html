@@ -166,10 +166,10 @@
                 onclick="printAnswers()">Imprimir Respuestas</button>
             <button type="button" class="btn btn-danger mx-2" id="consolidateButton" style="display: none;"
                 onclick="validatePassword()">Corregir Evaluación</button>
-            <button type="button" class="btn btn-outline-success" onclick="printReport()">Imprimir Informe</button>
         </div>
         <div id="spinner" class="loader" style="display: none;"></div>
     </div>
+
 
     <!-- Sección de resultados y gráfico -->
     <div id="resultsSection" style="display: none;">
@@ -224,8 +224,15 @@
                 <div id="percentageDisplay"><b>Porcentaje de Idoneidad:</b> <span id="averagePercentage"><b>0</b></span>
                 </div>
                 <br>
-                <button type="button" class="btn btn-secondary" id="correctButton" onclick="toggleAnswers()">Mostrar
-                    Respuestas Correctas</button>
+                <div class="center-container">
+                    <div class="text-center d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" id="correctButton" onclick="toggleAnswers()">Mostrar
+                            Respuestas Correctas</button>
+                        <button type="button" class="btn btn-outline-success mx-2" id="printReportButton" style="display: none;"
+                            onclick="printReport()">Imprimir Informe</button>
+                    </div>
+                </div>
+                
                 <br>
             </div>
         </section>
