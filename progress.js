@@ -2,24 +2,47 @@ document.addEventListener("DOMContentLoaded", function () {
     let progress = 0;
 
     // Encuentra todos los formularios en la página
-    // Encuentra todos los formularios en la página
     const forms = document.querySelectorAll("form[id^='examForm']");
     const consolidateButton = document.getElementById('consolidateButton');
     const showAnswersButton = document.getElementById('showAnswersButton');
     const printAnswersButton = document.getElementById('printAnswersButton');
+    const printReportButton = document.getElementById('printReportButton');
     const progressBar = document.getElementById('progressBar');
     const resultsSection = document.getElementById('resultsSection');
     const spinner = document.getElementById('spinner');
 
+    // Manejar clics en las tarjetas
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', function () {
+            const target = card.getAttribute('data-target');
+            const formSection = document.getElementById(target);
+            if (formSection) {
+                formSection.classList.toggle('d-none');
+            }
+        });
+    });
+
     forms.forEach(form => {
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true; // Deshabilitar el botón de envío inicialmente
+
+        form.addEventListener("change", function () {
+            const isValid = validateFormSelection(form);
+            submitButton.disabled = !isValid; // Habilitar el botón de envío solo si el formulario es válido
+        });
+
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
             // Incrementa el progreso en un 25%
             progress = Math.min(progress + 25, 100);
 
+            // Lógica para manejar el envío de respuestas
+            const formData = new FormData(form);
+            const isValid = validateFormData(formData);
+
             // Actualiza la barra de progreso
-            const progressBar = document.getElementById('progressBar');
             progressBar.style.width = `${progress}%`;
             progressBar.setAttribute('aria-valuenow', progress);
             progressBar.textContent = `${progress}%`;
@@ -55,25 +78,55 @@ document.addEventListener("DOMContentLoaded", function () {
             resultsSection.style.display = 'block';
         }, 2500);
     });
-
-    showChartButton.addEventListener("click", function () {
-        const radarChartDiv = document.getElementById('div1_2');
-        radarChartDiv.style.display = 'block';
-        showChartButton.style.display = 'none';
-    });
-
 });
+
+function validateFormSelection(form) {
+    const formId = form.getAttribute('id');
+    let requiredSelections = 1; // Número predeterminado de selecciones necesarias
+
+    if (formId === 'examForm2' || formId === 'examForm3' || formId === 'examForm4') {
+        requiredSelections = 3; // Número de selecciones necesarias para preguntas de selección múltiple
+    }
+
+    const selectedOptions = form.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked');
+    return selectedOptions.length === requiredSelections;
+}
+
+function validateFormData(formData) {
+    // Lógica para validar los datos del formulario
+    for (const entry of formData.entries()) {
+        if (!entry[1]) {
+            return false;
+        }
+    }
+    return true;
+}
 
 function validatePassword() {
     const password = prompt("Por favor, introduce la contraseña:");
     if (password === "CUGC") {
         alert("Contraseña correcta. Procediendo a corregir la evaluación...");
         correctEvaluation();
-    
     } else {
         alert("Contraseña incorrecta. Inténtalo de nuevo.");
+        validatePassword(); // Vuelve a pedir la contraseña
     }
 }
+
+function checkPassword() {
+    const password = document.getElementById('passwordInput').value;
+    if (password === "CUGC") {
+        alert("Contraseña correcta. Procediendo a corregir la evaluación...");
+        correctEvaluation();
+        document.getElementById('printReportButton').disabled = false; // Habilitar el botón de imprimir informe
+        const passwordModal = bootstrap.Modal.getInstance(document.getElementById('passwordModal'));
+        passwordModal.hide();
+    } else {
+        alert("Contraseña incorrecta. Inténtalo de nuevo.");
+        document.getElementById('passwordInput').value = ''; // Limpiar el campo de entrada
+    }
+}
+
 function toggleSelectedAnswersDisplay() {
     const selectedAnswersContainer = document.getElementById('selectedAnswersContainer');
     const showAnswersButton = document.getElementById('showAnswersButton');
@@ -86,7 +139,6 @@ function toggleSelectedAnswersDisplay() {
         showAnswersButton.textContent = 'Mostrar respuestas';
     }
 }
-
 
 function showSelectedAnswers() {
     const selectedAnswersContainer = document.getElementById('selectedAnswersContainer');
