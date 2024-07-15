@@ -326,7 +326,18 @@ canvas {
     border-color: #FFFF00; /* Amarillo */
 }
 
-  
+.form-container {
+    width: 50%;
+    overflow-y: auto;
+}
+#viewDiv {
+    width: 50%;
+    height: 10%;
+}
+.form-section.d-none {
+    display: none;
+}
+
 .intro-section p {
     color: rgb(230, 228, 228);
 }
