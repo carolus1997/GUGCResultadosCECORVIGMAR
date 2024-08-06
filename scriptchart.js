@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function drawRadarChart(data, labels) {
     const ctx = document.getElementById('radarChart').getContext('2d');
-    const chart = new Chart(ctx, {
+    window.myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: labels,
@@ -34,11 +34,11 @@ function drawRadarChart(data, labels) {
             elements: { line: { borderWidth: 3 } }
         }
     });
-    window.myRadarChart = chart;
 }
 
+
 function showChart() {
-    document.getElementById('resultsSection').style.display = 'block';
+    document.getElementById('resultsSection');
     const data = [65, 59, 80, 81]; // Datos de ejemplo
     const labels = ['Mando y Control', 'Situación', 'Decisión', 'Comunicación'];
     drawRadarChart(data, labels);
@@ -185,9 +185,26 @@ function updateChart(formId, selectedAnswers) {
     document.getElementById(`score${category}`).textContent = `${score.toFixed(2)}%`;
 
     const totalScore = window.myRadarChart.data.datasets[0].data.reduce((a, b) => a + b);
-    const percentageSuitability = (totalScore / 40 * 10).toFixed(2);
+    const percentageSuitability = (totalScore / 4).toFixed(2);  // Ajustado para 4 categorías
     document.getElementById('averagePercentage').textContent = `${percentageSuitability}%`;
 }
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    const formId = event.target.id;
+    const selectedAnswers = Array.from(event.target.querySelectorAll('input:checked')).map(input => input.value);
+    updateChart(formId, selectedAnswers);
+
+    // Mover al siguiente ítem del carrusel
+    const carousel = bootstrap.Carousel.getInstance(document.querySelector('#formCarousel'));
+    carousel.next();
+}
+
+document.getElementById('examForm1').addEventListener('submit', handleFormSubmit);
+document.getElementById('examForm2').addEventListener('submit', handleFormSubmit);
+document.getElementById('examForm3').addEventListener('submit', handleFormSubmit);
+document.getElementById('examForm4').addEventListener('submit', handleFormSubmit);
+
 
 function toggleAnswers() {
     const answersDiv = document.getElementById('correctAnswers');
@@ -256,9 +273,8 @@ function clearAnswers() {
     }, delay);
 }
 
-function toggleSelectedAnswers(category) {
+function toggleSelectedAnswers(category, button) {
     const list = document.getElementById(`selected${category}`);
-    const button = event.currentTarget;
     const show = !list.classList.contains("show");
 
     list.classList.toggle("show", show);
@@ -268,6 +284,7 @@ function toggleSelectedAnswers(category) {
         fillSelectedAnswers(category);
     }
 }
+
 
 function fillSelectedAnswers(category) {
     const answers = selectedAnswersByCategory[category];

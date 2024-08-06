@@ -3,17 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const formSections = document.querySelectorAll(".form-section");
 
     const options = [
-        // Opciones para la pregunta de Situación (2)
-        ["Aeropuerto de Argel", "Redes Sociales y Televisión", "Aeropuerto de Ibiza", "Aeropuerto de Alicante", "Policía Municipal de Ibiza	", "Puerto de Valencia", "Cuartel OTAN de Bétera (Valencia)", "Base de datos sobre matrícula del Barco y Bandera", "Puerto de Ibiza"
-        ],
-        // Opciones para la pregunta de Decisión (3)
+        ["Aeropuerto de Argel", "Redes Sociales y Televisión", "Aeropuerto de Ibiza", "Aeropuerto de Alicante", "Policía Municipal de Ibiza", "Puerto de Valencia", "Cuartel OTAN de Bétera (Valencia)", "Base de datos sobre matrícula del Barco y Bandera", "Puerto de Ibiza"],
         ["Activación de la Unidad Militar de Emergencias", "Activación de medios de rescate SASEMAR", "Alertar a la Casa África", "Informar al Departamento de Seguridad Nacional", "Alerta Policía Nacional, Cruz Roja, CNI", "Activar aviones de combate del ejercito del Aire y del Espacio", "Envío de medios aéreos GC y alertar unidades de intervención GC-UEI", "Activar los medios de la Armada Española", "Alertar Guardacostas de Argelia"],
-        // Opciones para la pregunta de Comunicación (4)
-        ["No se debe realizar ninguna declaración institucional", "Detectado barco Nodriza con inmigrantes se activa salvamento y rescate SASEMAR", "Solo realizar declaración institucional al finalizar la intervención", "Se informa de activación medios aéreos GC para verificar peligrosidad traficantes", "Se informa de coordinación con autoridades de Argelia ", "Se informa de intervención de unidades GC para detener traficantes de personas", "Se informa del origen de las fuentes", "Se informa de posibles victimas", "Se informa en redes sociales de actuaciones en casa instante"]
+        ["No se debe realizar ninguna declaración institucional", "Detectado barco Nodriza con inmigrantes se activa salvamento y rescate SASEMAR", "Solo realizar declaración institucional al finalizar la intervención", "Se informa de activación medios aéreos GC para verificar peligrosidad traficantes", "Se informa de coordinación con autoridades de Argelia", "Se informa de intervención de unidades GC para detener traficantes de personas", "Se informa del origen de las fuentes", "Se informa de posibles victimas", "Se informa en redes sociales de actuaciones en cada instante"]
     ];
 
+    // Inicialmente oculta todas las secciones del formulario
     formSections.forEach(section => section.classList.add('hidden'));
 
+    // Maneja el clic en las tarjetas para mostrar el formulario correspondiente
     cards.forEach(card => {
         card.addEventListener("click", function (event) {
             event.preventDefault();
@@ -32,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Genera las opciones para las preguntas
     function generateOptions(questionIndex, optionsList) {
         const questionDiv = document.getElementById(`options${questionIndex + 2}`);
         optionsList.forEach(option => {
@@ -51,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             div.appendChild(label);
             questionDiv.appendChild(div);
 
+            // Limita la selección a 3 opciones
             checkbox.addEventListener("change", function () {
                 const checkedCheckboxes = questionDiv.querySelectorAll('input[type="checkbox"]:checked');
                 questionDiv.querySelectorAll('input[type="checkbox"]').forEach(cb => {
@@ -61,8 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Genera opciones para cada pregunta basada en el índice
     options.forEach((optionsList, index) => generateOptions(index, optionsList));
 
+    // Maneja el envío del formulario
     document.querySelectorAll("form[id^='examForm']").forEach(form => {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
@@ -70,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const formData = new FormData(form);
             const selectedAnswers = [];
 
-            formData.forEach((value, key) => {
+            formData.forEach((value) => {
                 selectedAnswers.push(value);
             });
 
@@ -83,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentFormSection.classList.remove('fade-out');
             }, 500);
 
+            // Muestra el modal de confirmación
             $('#confirmationModal').modal('show');
 
             let countdown = 5;
@@ -92,11 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 countdownElement.textContent = countdown--;
                 if (countdown < 0) {
                     clearInterval(timer);
-                    window.close();
+                    $('#confirmationModal').modal('hide');
                 }
             }, 1000);
         });
     });
-
-
 });

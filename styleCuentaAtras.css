@@ -1,0 +1,46 @@
+#cuentaRegresiva {
+    font-size: 4rem;
+    font-family: 'Digital', sans-serif;
+    color: #3d3d3d;
+}
+
+.btn-iconCuenta {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background-color: #2e0b6e;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-iconCuenta svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+#iniciarCuentaRegresiva {
+    background-color: #f7b5a9; /* Verde al hacer hover */
+}
+#iniciarCuentaRegresiva:hover {
+    background-color: #a73b28; /* Verde al hacer hover */
+    transform: scale(1.1);
+}
+
+@media screen and (min-width: 480px) {
+    .btn-iconCuenta {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #cuentaRegresiva {
+        font-size: 2rem;
+    }
+}

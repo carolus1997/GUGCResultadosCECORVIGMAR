@@ -334,19 +334,12 @@ canvas {
     width: 50%;
     height: 10%;
 }
-.form-section.d-none {
-    display: none;
-}
+
 
 .intro-section p {
     color: rgb(230, 228, 228);
 }
 
-.form-section {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
-}
 
 .form-section.active {
     display: block;
@@ -354,10 +347,7 @@ canvas {
     height: auto;
 }
 
-.hidden {
-    display: none;
-    opacity: 0;
-}
+
 
 .fade-out {
     opacity: 0;
