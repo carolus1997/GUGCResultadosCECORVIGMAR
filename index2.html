@@ -198,23 +198,22 @@
         </div>
     </section> -->
 
-
+    <!-- Contenedor para mostrar las respuestas seleccionadas -->
+    <div id="selectedAnswersContainer" style="display: none; margin-top: 20px;">
+        <h2>Respuestas Seleccionadas</h2>
+        <div id="selectedAnswersContent"></div>
+    </div>
 
     <!-- Sección de resultados y gráfico -->
     <div id="resultsSection" style="display: none;">
         <section id="SeccionTitulo" class="text-center my-4">
             <p class="fs-1">Resultados de la práctica</p>
         </section>
-        <!-- Contenedor para mostrar las respuestas seleccionadas -->
-        <div id="selectedAnswersContainer" class="justify-content-left" style="display: none; margin-top: 20px;">
-            <h2>Respuestas Seleccionadas</h2>
-            <div id="selectedAnswersContent"></div>
-        </div>
-        <section id="SeccionGrande1" class="d-flex justify-content-right align-items-center flex-wrap"
+        <section id="SeccionGrande1" class="d-flex justify-content-center align-items-center flex-wrap"
             style="display: none;">
             <div id="div1_1" class="mx-3">
                 <div style="display: flex; flex-direction: row;">
-                    <!--<ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <button class="btn btn-sm btn-circle btn-outline-secondary"
                                 onclick="toggleSelectedAnswers('Mando', this)">+</button>
@@ -239,16 +238,16 @@
                             Comunicación <span class="badge bg-primary float-end" id="scoreComunicacion"></span>
                             <ul id="selectedComunicacion" class="selected-answers"></ul>
                         </li>
-                    </ul>-->
-                    <div id="correctAnswers" style="display:flex; margin-left: 5%;" aria-hidden="true">
-                        <h5>Mando y Control</h5><span class="badge bg-primary float-end" id="scoreMando"></span>
-                        <ul id="answerMando" aria-labelledby="headingMando" class="selected-answers"></ul>
-                        <h5>Situación</h5><span class="badge bg-primary float-end" id="scoreSituacion"></span>
-                        <ul id="answerSituacion" aria-labelledby="headingSituacion" class="selected-answers"></ul>
-                        <h5>Decisión</h5><span class="badge bg-primary float-end" id="scoreDecision"></span>
-                        <ul id="answerDecision" aria-labelledby="headingDecision" class="selected-answers"></ul>
-                        <h5>Comunicación</h5><span class="badge bg-primary float-end" id="scoreComunicacion"></span>
-                        <ul id="answerComunicacion" aria-labelledby="headingComunicacion" class="selected-answers"></ul>
+                    </ul>
+                    <div id="correctAnswers" style="display:none; margin-left: 5%;" aria-hidden="true">
+                        <h5>Mando y Control</h5>
+                        <ul id="answerMando" aria-labelledby="headingMando"></ul>
+                        <h5>Situación</h5>
+                        <ul id="answerSituacion" aria-labelledby="headingSituacion"></ul>
+                        <h5>Decisión</h5>
+                        <ul id="answerDecision" aria-labelledby="headingDecision"></ul>
+                        <h5>Comunicación</h5>
+                        <ul id="answerComunicacion" aria-labelledby="headingComunicacion"></ul>
                     </div>
 
                 </div>

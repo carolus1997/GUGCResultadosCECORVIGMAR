@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
         interval: false
     });
 
+    // Manejador de clic en las tarjetas y botones para abrir el formulario correspondiente
     cards.forEach(card => {
         card.addEventListener("click", function (event) {
             event.preventDefault();
-            const targetForm = document.querySelector(card.dataset.target);
+            const targetFormId = card.closest('.card').dataset.target;
+            const targetForm = document.getElementById(targetFormId);
             const targetIndex = Array.from(targetForm.parentElement.children).indexOf(targetForm);
 
             // Activar el carrusel en el índice correspondiente
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Configurar el envío del formulario y la actualización del gráfico
+    // Configuración del envío del formulario y actualización del gráfico
     document.querySelectorAll("form[id^='examForm']").forEach(form => {
         form.addEventListener("submit", function (event) {
             event.preventDefault();

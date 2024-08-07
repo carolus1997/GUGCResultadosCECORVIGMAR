@@ -415,6 +415,7 @@ canvas {
 
 #selectedAnswersContainer {
     display: none;
+    width: 100hv;
     margin-top: 20px;
     text-align: center;
     padding: 20px;
@@ -422,9 +423,49 @@ canvas {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
+    max-width: 500px; /* Reduce el ancho para que quede más alineado a la izquierda */
+    margin-left: 0; /* Elimina el centrado horizontal */
+    margin-right: auto; /* Permite que se alinee a la izquierda */
+    position: relative; /* Permite mover el contenedor con respecto a su contenedor padre */
+    left: 20%;
+    top: 5%;
+    
+}
+
+#selectedAnswersContainer, #correctAnswersContainer {
+    display: block;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+#correctAnswersContainer {
+    background-color: #e9f7ef; /* Un color de fondo diferente para distinguir las respuestas correctas */
+}
+
+#selectedAnswersContent ul, #correctAnswersContent ul {
+    list-style: none;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+#selectedAnswersContent li, #correctAnswersContent li {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.badge {
+    background-color: var(--primary-color);
+    font-weight: bold;
 }
 
 .loader {

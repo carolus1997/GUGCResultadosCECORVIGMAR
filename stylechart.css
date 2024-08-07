@@ -238,6 +238,8 @@ canvas {
     /* Suaviza la transición de la altura */
 }
 
+
+
 /* Cuando el contenedor está 'abierto' */
 .selected-answers.show {
     max-height: 300px;
