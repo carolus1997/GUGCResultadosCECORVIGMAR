@@ -199,76 +199,62 @@
     </section> -->
 
 
-
+    <section id="SeccionTitulo" class="text-center my-4">
+        <p class="fs-1">Resultados de la práctica</p>
+    </section>
+    <!-- Contenedor para mostrar las respuestas seleccionadas -->
+    <div id="selectedAnswersContainer" class="justify-content-left" style="display: none; margin-top: 20px;">
+        <h2>Respuestas Seleccionadas</h2>
+        <div id="selectedAnswersContent"></div>
+    </div>
     <!-- Sección de resultados y gráfico -->
     <div id="resultsSection" style="display: none;">
-        <section id="SeccionTitulo" class="text-center my-4">
-            <p class="fs-1">Resultados de la práctica</p>
-        </section>
-        <!-- Contenedor para mostrar las respuestas seleccionadas -->
-        <div id="selectedAnswersContainer" class="justify-content-left" style="display: none; margin-top: 20px;">
-            <h2>Respuestas Seleccionadas</h2>
-            <div id="selectedAnswersContent"></div>
-        </div>
-        <section id="SeccionGrande1" class="d-flex justify-content-right align-items-center flex-wrap"
-            style="display: none;">
-            <div id="div1_1" class="mx-3">
-                <div style="display: flex; flex-direction: row;">
-                    <!--<ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <button class="btn btn-sm btn-circle btn-outline-secondary"
-                                onclick="toggleSelectedAnswers('Mando', this)">+</button>
-                            Mando y Control <span class="badge bg-primary float-end" id="scoreMando"></span>
-                            <ul id="selectedMando" class="selected-answers"></ul>
-                        </li>
-                        <li class="list-group-item">
-                            <button class="btn btn-sm btn-circle btn-outline-secondary"
-                                onclick="toggleSelectedAnswers('Situacion', this)">+</button>
-                            Situación <span class="badge bg-primary float-end" id="scoreSituacion"></span>
-                            <ul id="selectedSituacion" class="selected-answers"></ul>
-                        </li>
-                        <li class="list-group-item">
-                            <button class="btn btn-sm btn-circle btn-outline-secondary"
-                                onclick="toggleSelectedAnswers('Decision', this)">+</button>
-                            Decisión <span class="badge bg-primary float-end" id="scoreDecision"></span>
-                            <ul id="selectedDecision" class="selected-answers"></ul>
-                        </li>
-                        <li class="list-group-item">
-                            <button class="btn btn-sm btn-circle btn-outline-secondary"
-                                onclick="toggleSelectedAnswers('Comunicacion', this)">+</button>
-                            Comunicación <span class="badge bg-primary float-end" id="scoreComunicacion"></span>
-                            <ul id="selectedComunicacion" class="selected-answers"></ul>
-                        </li>
-                    </ul>-->
-                    <div id="correctAnswers" style="display:flex; margin-left: 5%;" aria-hidden="true">
-                        <h5>Mando y Control</h5><span class="badge bg-primary float-end" id="scoreMando"></span>
+        
+        <section id="SeccionGrande1" class="d-flex justify-content-between align-items-start flex-wrap">
+            <div id="div1_1" class="mx-3" style="width: 100%;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <!-- Contenedor de respuestas seleccionadas -->
+                    <div id="selectedAnswersContainer" style="display: block; width: 48%; text-align: left; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <h2>Respuestas Seleccionadas</h2>
+                        <div id="selectedAnswersContentDisplay" class="selected-answers"></div>
+                    </div>
+        
+                    <!-- Contenedor de respuestas correctas -->
+                    <div id="correctAnswers" style="display: block; width: 48%; text-align: left; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <h2>Respuestas Correctas</h2>
+                        <h5>Mando y Control</h5>
+                        <span class="badge bg-primary float-end" id="scoreMando"></span>
                         <ul id="answerMando" aria-labelledby="headingMando" class="selected-answers"></ul>
-                        <h5>Situación</h5><span class="badge bg-primary float-end" id="scoreSituacion"></span>
+                        
+                        <h5>Situación</h5>
+                        <span class="badge bg-primary float-end" id="scoreSituacion"></span>
                         <ul id="answerSituacion" aria-labelledby="headingSituacion" class="selected-answers"></ul>
-                        <h5>Decisión</h5><span class="badge bg-primary float-end" id="scoreDecision"></span>
+                        
+                        <h5>Decisión</h5>
+                        <span class="badge bg-primary float-end" id="scoreDecision"></span>
                         <ul id="answerDecision" aria-labelledby="headingDecision" class="selected-answers"></ul>
-                        <h5>Comunicación</h5><span class="badge bg-primary float-end" id="scoreComunicacion"></span>
+                        
+                        <h5>Comunicación</h5>
+                        <span class="badge bg-primary float-end" id="scoreComunicacion"></span>
                         <ul id="answerComunicacion" aria-labelledby="headingComunicacion" class="selected-answers"></ul>
                     </div>
-
                 </div>
+        
                 <br>
-                <div id="percentageDisplay"><b>Porcentaje de Idoneidad:</b> <span id="averagePercentage"><b>0</b></span>
+                <div id="percentageDisplay" class="text-center">
+                    <b>Porcentaje de Idoneidad:</b> <span id="averagePercentage"><b>0</b></span>
                 </div>
                 <br>
                 <div class="center-container">
                     <div class="text-center d-flex justify-content-center">
-                        <button type="button" class="btn btn-secondary" id="correctButton"
-                            onclick="toggleAnswers()">Mostrar
-                            Respuestas Correctas</button>
-                        <button type="button" class="btn btn-outline-success mx-2" id="printReportButton"
-                            style="display: none;" onclick="printReport()">Imprimir Informe</button>
+                        <button type="button" class="btn btn-outline-success mx-2" id="printReportButton" style="display: block;" onclick="printReport()">Imprimir Informe</button>
                     </div>
                 </div>
-
                 <br>
             </div>
         </section>
+        
+        
     </div>
 
     <!-- Modal para la contraseña -->
@@ -323,6 +309,8 @@
     <script src="scriptform.js"></script>
     <script src="progress.js"></script>
     <script src="cuentaAtras.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </body>
 
 </html>

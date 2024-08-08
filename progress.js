@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     consolidateButton.addEventListener("click", function () {
-        consolidateButton.style.display = 'none';
+        consolidateButton.style.display = 'none'; showAnswersButton.style.display = 'none'; printAnswersButton.style.display = 'none';
         spinner.style.display = 'block';
 
         // Bloquear todos los formularios
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             spinner.style.display = 'none';
             resultsSection.style.display = 'block';
-        }, 2500);
+        }, 1500);
     });
 });
 
@@ -112,21 +112,27 @@ function validatePassword() {
         alert("Contraseña incorrecta. Inténtalo de nuevo.");
         validatePassword(); // Vuelve a pedir la contraseña
     }
+
+    
 }
 
 function checkPassword() {
     const password = document.getElementById('passwordInput').value;
-    if (password === "CUGC") {
+    if (password === "cugc") {
         alert("Contraseña correcta. Procediendo a corregir la evaluación...");
         correctEvaluation();
         document.getElementById('printReportButton').disabled = false; // Habilitar el botón de imprimir informe
+
         const passwordModal = bootstrap.Modal.getInstance(document.getElementById('passwordModal'));
         passwordModal.hide();
+        
     } else {
         alert("Contraseña incorrecta. Inténtalo de nuevo.");
         document.getElementById('passwordInput').value = ''; // Limpiar el campo de entrada
     }
 }
+
+
 
 function toggleSelectedAnswersDisplay() {
     const selectedAnswersContainer = document.getElementById('selectedAnswersContainer');
@@ -137,7 +143,7 @@ function toggleSelectedAnswersDisplay() {
         showAnswersButton.textContent = 'Ocultar respuestas';
     } else {
         selectedAnswersContainer.style.display = 'none';
-        showAnswersButton.textContent = 'Mostrar respuestas';
+        showAnswersButton.textContent = 'Mis respuestas';
     }
 }
 
@@ -166,6 +172,72 @@ function showSelectedAnswers() {
     });
 
     selectedAnswersContainer.style.display = 'block'; // Mostrar el contenedor
+}
+
+function showAllAnswers() {
+    // Mostrar las respuestas seleccionadas y correctas
+    const selectedAnswersContainer = document.getElementById('selectedAnswersContainerDisplay');
+    const correctAnswersContainer = document.getElementById('correctAnswersContainer');
+
+    if (selectedAnswersContainer.style.display === 'none' || selectedAnswersContainer.style.display === '') {
+        displaySelectedAndCorrectAnswers();
+    }
+}
+
+function displaySelectedAndCorrectAnswers() {
+    const selectedAnswersContent = document.getElementById('selectedAnswersContent');
+    const correctAnswersContent = document.getElementById('correctAnswersContent');
+
+    const sections = ['Mando y Control', 'Situación', 'Decisión', 'Comunicación'];
+    selectedAnswersContent.innerHTML = ''; // Limpiar contenido previo
+    correctAnswersContent.innerHTML = ''; // Limpiar contenido previo
+
+    sections.forEach((section, index) => {
+        const form = document.querySelector(`#examForm${index + 1}`);
+        const selectedInputs = form.querySelectorAll('input:checked');
+        const correctAnswers = getCorrectAnswers(index + 1);
+
+        // Añadir las respuestas seleccionadas
+        if (selectedInputs.length > 0) {
+            const sectionTitle = document.createElement('h4');
+            sectionTitle.textContent = section;
+            selectedAnswersContent.appendChild(sectionTitle);
+
+            selectedInputs.forEach(input => {
+                const answer = document.createElement('p');
+                answer.textContent = input.value;
+                selectedAnswersContent.appendChild(answer);
+            });
+        }
+
+        // Añadir las respuestas correctas
+        if (correctAnswers.length > 0) {
+            const correctSectionTitle = document.createElement('h4');
+            correctSectionTitle.textContent = section;
+            correctAnswersContent.appendChild(correctSectionTitle);
+
+            correctAnswers.forEach(answer => {
+                const correctAnswer = document.createElement('p');
+                correctAnswer.textContent = answer;
+                correctAnswersContent.appendChild(correctAnswer);
+            });
+        }
+    });
+
+    // Mostrar los contenedores
+    selectedAnswersContainer.style.display = 'block';
+    correctAnswersContainer.style.display = 'block';
+}
+
+function getCorrectAnswers(formIndex) {
+    const correctAnswersMap = {
+        1: ['Centro de Coordinación para la Vigilancia Marítima de Costas y Fronteras'],
+        2: ['Redes Sociales y Televisión', 'Aeropuerto de Ibiza', 'Base de datos sobre matrícula del Barco y Bandera'],
+        3: ['Activación de medios de rescate SASEMAR', 'Alerta Policía Nacional, Cruz Roja, CNI', 'Envío de medios aéreos GC y alertar unidades de intervención GC-UEI'],
+        4: ['Detectado barco Nodriza con inmigrantes se activa salvamento y rescate SASEMAR', 'Se informa de activación medios aéreos GC para verificar peligrosidad traficantes', 'Se informa de intervención de unidades GC para detener traficantes de personas']
+    };
+
+    return correctAnswersMap[formIndex] || [];
 }
 
 function showPrintSelectedAnswers() {
@@ -206,8 +278,11 @@ function showPrintSelectedAnswers() {
     return printContainer.innerHTML;
 }
 
+
 function printAnswers() {
-    const printContent = showPrintSelectedAnswers();
+    // Primero, captura el gráfico como una imagen
+    const radarChartCanvas = document.getElementById('radarChart');
+    const chartImage = radarChartCanvas.toDataURL('image/png'); // Convierte el canvas en una imagen
 
     const printWindow = window.open('', '', 'height=600,width=800');
     printWindow.document.write('<html><head><title>Respuestas Seleccionadas</title>');
@@ -219,7 +294,17 @@ function printAnswers() {
     printWindow.document.write('div { page-break-inside: avoid; }');
     printWindow.document.write('</style>');
     printWindow.document.write('</head><body>');
+
+    // Agregar el contenido de las respuestas seleccionadas
+    const printContent = showPrintSelectedAnswers();
     printWindow.document.write(printContent);
+
+    // Agregar la imagen del gráfico al documento de impresión
+    printWindow.document.write('<h4>Gráfico de Resultados</h4>');
+    printWindow.document.write('<img src="' + chartImage + '" style="max-width: 100%; height: auto;">');
+
+    printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.print();
 }
+

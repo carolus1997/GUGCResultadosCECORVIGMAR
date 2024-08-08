@@ -413,34 +413,17 @@ canvas {
     text-align: center; /* Centra el texto */
 }
 
-#selectedAnswersContainer {
-    display: none;
-    width: 100hv;
-    margin-top: 20px;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    max-width: 500px; /* Reduce el ancho para que quede más alineado a la izquierda */
-    margin-left: 0; /* Elimina el centrado horizontal */
-    margin-right: auto; /* Permite que se alinee a la izquierda */
-    position: relative; /* Permite mover el contenedor con respecto a su contenedor padre */
-    left: 20%;
-    top: 5%;
-    
-}
 
 #selectedAnswersContainer, #correctAnswersContainer {
-    display: block;
-    text-align: left;
+    display: inline-block;
+    width: 45%;
+    vertical-align: top;
+    margin: 0 2.5%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
-    max-width: 600px;
 }
 
 #correctAnswersContainer {

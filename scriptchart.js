@@ -255,23 +255,7 @@ function fillAnswers(animate) {
     });
 }
 
-function clearAnswers() {
-    const lists = document.querySelectorAll('#correctAnswers ul li');
-    let delay = 0;
 
-    lists.forEach(listItem => {
-        listItem.classList.add('hiddenAnswer');
-        setTimeout(() => {
-            listItem.style.display = 'none';
-        }, delay);
-        delay += 100;
-    });
-
-    setTimeout(() => {
-        lists.forEach(list => list.parentElement.innerHTML = '');
-        document.getElementById('correctAnswers').style.display = 'none';
-    }, delay);
-}
 
 function toggleSelectedAnswers(category, button) {
     const list = document.getElementById(`selected${category}`);
@@ -299,3 +283,77 @@ function fillSelectedAnswers(category) {
         }, index * 100);
     });
 }
+
+
+function updateSelectedAnswers(category, selectedAnswers) {
+    const selectedAnswersList = document.getElementById(`selectedAnswersContent`);
+    selectedAnswersList.innerHTML = ''; // Limpiar respuestas anteriores
+
+    selectedAnswers.forEach(answer => {
+        const listItem = document.createElement('li');
+        listItem.textContent = answer;
+        selectedAnswersList.appendChild(listItem);
+    });
+}
+
+function updateCorrectAnswers(category, correctAnswers) {
+    const correctAnswersList = document.getElementById(`answer${category}`);
+    correctAnswersList.innerHTML = ''; // Limpiar respuestas anteriores
+
+    correctAnswers.forEach(answer => {
+        const listItem = document.createElement('li');
+        listItem.textContent = answer;
+        correctAnswersList.appendChild(listItem);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Mapeo de las respuestas correctas para cada formulario
+    const correctAnswersMap = {
+        'examForm1': ['Centro de Coordinación para la Vigilancia Marítima de Costas y Fronteras'],
+        'examForm2': ['Redes Sociales y Televisión', 'Aeropuerto de Ibiza', 'Base de datos sobre matrícula del Barco y Bandera'],
+        'examForm3': ['Activación de medios de rescate SASEMAR', 'Alerta Policía Nacional, Cruz Roja, CNI', 'Envío de medios aéreos GC y alertar unidades de intervención GC-UEI'],
+        'examForm4': ['Detectado barco Nodriza con inmigrantes se activa salvamento y rescate SASEMAR', 'Se informa de activación medios aéreos GC para verificar peligrosidad traficantes', 'Se informa de intervención de unidades GC para detener traficantes de personas']
+    };
+
+    function updateSelectedAnswers(selectedAnswers) {
+        const selectedAnswersList = document.getElementById('selectedAnswersContent');
+        selectedAnswersList.innerHTML = ''; // Limpiar respuestas anteriores
+
+        selectedAnswers.forEach(answer => {
+            const listItem = document.createElement('li');
+            listItem.textContent = answer;
+            selectedAnswersList.appendChild(listItem);
+        });
+    }
+
+    function updateCorrectAnswers(correctAnswers) {
+        const correctAnswersList = document.getElementById('correctAnswersContent');
+        correctAnswersList.innerHTML = ''; // Limpiar respuestas anteriores
+
+        correctAnswers.forEach(answer => {
+            const listItem = document.createElement('li');
+            listItem.textContent = answer;
+            correctAnswersList.appendChild(listItem);
+        });
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const formId = event.target.id;
+        const selectedAnswers = Array.from(event.target.querySelectorAll('input:checked')).map(input => input.value);
+
+        updateSelectedAnswers(selectedAnswers);
+        updateCorrectAnswers(correctAnswersMap[formId]);
+
+        // Mostrar la sección de resultados
+        document.getElementById('resultsSection').style.display = 'block';
+        document.getElementById('SeccionGrande1').style.display = 'flex';
+    }
+
+    // Añadir manejadores de envío de formulario para cada formulario
+    document.querySelectorAll("form[id^='examForm']").forEach(form => {
+        form.addEventListener("submit", handleFormSubmit);
+    });
+});
+
