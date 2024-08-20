@@ -414,37 +414,7 @@ canvas {
 }
 
 
-#selectedAnswersContainer, #correctAnswersContainer {
-    display: inline-block;
-    width: 45%;
-    vertical-align: top;
-    margin: 0 2.5%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-}
 
-#correctAnswersContainer {
-    background-color: #e9f7ef; /* Un color de fondo diferente para distinguir las respuestas correctas */
-}
-
-#selectedAnswersContent ul, #correctAnswersContent ul {
-    list-style: none;
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-#selectedAnswersContent li, #correctAnswersContent li {
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    display: flex;
-    justify-content: space-between;
-}
 
 .badge {
     background-color: var(--primary-color);
@@ -485,3 +455,6 @@ canvas {
     50% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
     75%, 100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
 }
+
+
+
