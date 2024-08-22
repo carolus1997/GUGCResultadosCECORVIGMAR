@@ -1,0 +1,88 @@
+/* Color verde de la Guardia Civil */
+:root {
+    --guardia-civil-green: #006629; /* Código de color hexadecimal para el verde */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.header {
+    background-color: var(--guardia-civil-green);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.header p {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+}
+
+/* Centrado del contenido principal */
+main {
+    max-width: 800px;
+    margin: 40px auto; /* Centra el contenido horizontalmente */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centra el texto en las secciones */
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--guardia-civil-green);
+}
+
+.section p, .section li {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.section ol, .section ul {
+    margin-left: 20px;
+    text-align: left; /* Alinea el texto a la izquierda dentro de listas */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: var(--guardia-civil-green);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #004d1a; /* Un verde más oscuro al hacer hover */
+}
+
+.footer {
+    text-align: center;
+    padding: 10px 20px; /* Reducido el padding para hacerlo más fino */
+    background-color: var(--guardia-civil-green);
+    color: white;
+    font-size: 0.9rem; /* Reducido el tamaño de la fuente */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
