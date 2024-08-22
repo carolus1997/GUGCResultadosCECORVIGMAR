@@ -1,323 +1,50 @@
-<!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documento Unificado</title>
-
-    <!-- Enlaces a los estilos CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.20/esri/themes/light/main.css">
-    <link href="stylechart.css" rel="stylesheet">
-    <link href="styleCuentaAtras.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        #radarChartContainer,
-        #selectedAnswersContainer {
-            display: none;
-        }
-    </style>
+    <title>Instrucciones para el Examen</title>
+    <link rel="stylesheet" href="landingPage.css"> <!-- Vincula tu archivo CSS -->
 </head>
-
 <body>
-    <!-- Sección introductoria con imagen y texto -->
-    <div class="intro-section" style="margin-left: 10%; margin-right: 10%;">
-        <img src="icons/CUGC.png" alt="Logo del Centro Universitario Guardia Civil"
-            style="width: 150px; display: block; margin: auto;">
-        <p style="text-align: center; margin-top: 20px; color: black;">
-            Bienvenidos al ejercicio de evaluación. A continuación, encontrarán varias secciones con preguntas diseñadas
-            para evaluar sus conocimientos en diferentes áreas. Cada sección se centra en un tema específico y tiene
-            instrucciones claras sobre cómo responder. Por favor, lean cuidadosamente las instrucciones de cada tarjeta
-            antes de Evaluar.
-        </p>
-    </div>
+    <header class="header">
+        <h1>Bienvenido al Examen</h1>
+        <p>Siga estas instrucciones para completar el examen con éxito. Asegúrese de leer y comprender todas las instrucciones antes de comenzar.</p>
+    </header>
 
-
-    <!-- Cuenta Regresiva -->
-    <div id="cuentaRegresivaContainer" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-        <div id="cuentaRegresiva" class="display-2 text-center mb-4">15:00</div>
-        <div class="d-flex justify-content-center gap-2">
-            <button id="iniciarCuentaRegresiva" class="btn btn-iconCuenta">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                    class="bi bi-play-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-
-
-    <!-- Contenedor de las tarjetas -->
-    <div class="cards-container" style="margin-left: 10%; margin-right: 10%;">
-        <div class="card" data-target="mando-control">
-            <div class="card-details">
-                <p class="text-title">Mando y control</p>
-                <p class="text-body">Pregunta de única respuesta.</p>
-            </div>
-            <a href="#" class="card-button">Evaluar</a>
-        </div>
-        <div class="card" data-target="situacion">
-            <div class="card-details">
-                <p class="text-title">Situación</p>
-                <p class="text-body">Respuesta múltiple. Escoger unicamente tres respuestas</p>
-            </div>
-            <a href="#" class="card-button">Evaluar</a>
-        </div>
-        <div class="card" data-target="decision">
-            <div class="card-details">
-                <p class="text-title">Decisión</p>
-                <p class="text-body">Respuesta múltiple. Escoger únicamente tres respuestas</p>
-            </div>
-            <a href="#" class="card-button">Evaluar</a>
-        </div>
-        <div class="card" data-target="comunicacion">
-            <div class="card-details">
-                <p class="text-title">Comunicación</p>
-                <p class="text-body">Pregunta de respuesta múltiple. Escoger unicamente tres respuestas</p>
-            </div>
-            <a href="#" class="card-button">Evaluar</a>
-        </div>
-    </div>
-    <div class="container-fluid">
-
-        <!-- Contenedor de Formularios -->
-        <div class="form-sections-wrapper">
-            <div class="form-sections" style="margin-left: 25%;">
-                <div id="mando-control" class="form-section">
-                    <div class="container mt-5">
-                        <h1 class="text-center">Pregunta de Mando y Control</h1>
-                        <form id="examForm1">
-                            <div class="question">
-                                <h5>¿Cuál es el principal Centro de Mando y Control implicado en la incidencia?</h5>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="question1" id="option1"
-                                            value="Centro de Coordinación para la Vigilancia Marítima de Costas y Fronteras">
-                                        <label class="form-check-label" for="option1">Centro de Coordinación para la
-                                            Vigilancia Marítima de Costas y Fronteras</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="question1" id="option2"
-                                            value="Centro 112 de Palma de Mallorca">
-                                        <label class="form-check-label" for="option2">Centro 112 de Palma de
-                                            Mallorca</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="question1" id="option3"
-                                            value="Departamento de Seguridad Nacional">
-                                        <label class="form-check-label" for="option3">Departamento de Seguridad
-                                            Nacional</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar respuestas</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div id="situacion" class="form-section" style="display: none;">
-                    <div class="container mt-5">
-                        <h1 class="text-center">Pregunta de Situación</h1>
-                        <form id="examForm2">
-                            <div class="question">
-                                <h5>Elija 3 opciones: ¿De dónde obtendría información?</h5>
-                                <div class="form-group" id="options2">
-                                    <!-- Opciones generadas dinámicamente en JavaScript -->
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar respuestas</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div id="decision" class="form-section" style="display: none;">
-                    <div class="container mt-5">
-                        <h1 class="text-center">Pregunta de Decisión</h1>
-                        <form id="examForm3">
-                            <div class="question">
-                                <h5>Elija 3 opciones: Decisiones a adoptar con la información conocida</h5>
-                                <div class="form-group" id="options3">
-                                    <!-- Opciones generadas dinámicamente en JavaScript -->
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar respuestas</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div id="comunicacion" class="form-section" style="display: none;">
-                    <div class="container mt-5">
-                        <h1 class="text-center">Pregunta de Comunicación</h1>
-                        <form id="examForm4">
-                            <div class="question">
-                                <h5>Elija 3 opciones: Mensajes principales a la ciudadanía</h5>
-                                <div class="form-group" id="options4">
-                                    <!-- Opciones generadas dinámicamente en JavaScript -->
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar respuestas</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="chart-container" style="margin-right: 10%;">
-            <canvas id="radarChart" width="421" height="421"
-                style="display: block;box-sizing: border-box;height: 421px;width: 421px;margin-right: 60px;"></canvas>
-        </div>
-    </div>
-    <!-- Indicadores de Formulario -->
-    <div class="form-navigation text-center my-3">
-        <div class="indicator-container">
-            <span class="form-indicator active" data-target="mando-control"></span>
-            <span class="form-indicator" data-target="situacion"></span>
-            <span class="form-indicator" data-target="decision"></span>
-            <span class="form-indicator" data-target="comunicacion"></span>
-        </div>
-    </div>
-
-    <!-- Barra de Progreso -->
-    <div class="progress" style="margin-left: 10%; margin-right: 10%;">
-        <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%; height: auto;" aria-valuenow="0"
-            aria-valuemin="0" aria-valuemax="100">0%</div>
-    </div>
-    <br>
-    <div class="center-container">
-        <div class="text-center d-flex justify-content-center">
-            <button type="button" class="btn btn-info mx-2" id="showAnswersButton" style="display: none;"
-                onclick="toggleSelectedAnswersDisplay()">Mis respuestas</button>
-            <button type="button" class="btn btn-success mx-2" id="printAnswersButton" style="display: none;"
-                onclick="printAnswers()">Imprimir Respuestas Seleccionadas</button>
-            <button type="button" class="btn btn-danger mx-2" id="consolidateButton" style="display: none;"
-                onclick="validatePassword()">Corregir Evaluación</button>
-        </div>
-        <div id="spinner" class="loader" style="display: none;"></div>
-    </div>
-
-
-
-    <!-- Sección de Resultados y Gráfico -->
-    <section id="SeccionTitulo" class="text-center my-4">
-        <p class="fs-1">Resultados de la práctica</p>
-    </section>
-
-    <!-- Contenedor para mostrar las respuestas seleccionadas y correctas -->
-    <div id="resultsSection" style="display: none;">
-        <section id="SeccionGrande1" class="d-flex justify-content-between align-items-start flex-wrap">
-            <div id="div1_1" class="mx-3" style="width: 100%;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-
-                    <!-- Contenedor de respuestas seleccionadas -->
-                    <div id="selectedAnswersContainerUnique" class="answer-container" style="width: 48%;">
-                        <h2>Respuestas Seleccionadas</h2>
-                        <div id="selectedAnswersContentDisplay" class="selected-answers"></div>
-                    </div>
-
-                    <!-- Contenedor de respuestas correctas -->
-                    <div id="correctAnswersContainer" class="correct-answers" style="width: 48%;">
-                        <h2>Respuestas Correctas</h2>
-                        <div>
-                            <h5>Mando y Control</h5>
-                            <span class="badge bg-primary float-end" id="scoreMando"></span>
-                            <ul id="answerMando" aria-labelledby="headingMando" class="scorrect-answers"></ul>
-                        </div>
-                        <div>
-                            <h5>Situación</h5>
-                            <span class="badge bg-primary float-end" id="scoreSituacion"></span>
-                            <ul id="answerSituacion" aria-labelledby="headingSituacion" class="correct-answers"></ul>
-                        </div>
-                        <div>
-                            <h5>Decisión</h5>
-                            <span class="badge bg-primary float-end" id="scoreDecision"></span>
-                            <ul id="answerDecision" aria-labelledby="headingDecision" class="correct-answers"></ul>
-                        </div>
-                        <div>
-                            <h5>Comunicación</h5>
-                            <span class="badge bg-primary float-end" id="scoreComunicacion"></span>
-                            <ul id="answerComunicacion" aria-labelledby="headingComunicacion" class="correct-answers">
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <br>
-                <div id="percentageDisplay" class="text-center">
-                    <b>Porcentaje de Idoneidad:</b> <span id="averagePercentage"><b>0</b></span>
-                </div>
-                <br>
-                <div class="center-container">
-                    <div class="text-center d-flex justify-content-center">
-                        <button type="button" class="btn btn-outline-success mx-2" id="printReportButton"
-                            style="display: block;" onclick="printReport()">Imprimir Informe</button>
-                    </div>
-                </div>
-                <br>
-            </div>
+    <main>
+        <!-- Sección de Instrucciones Paso a Paso -->
+        <section class="section steps">
+            <h2>Instrucciones Paso a Paso</h2>
+            <ol>
+                <li><strong>Cuenta Regresiva:</strong> Una vez que inicie el examen, tendrá 15 minutos para completarlo.</li>
+                <li><strong>Responda las Preguntas:</strong> Lea cada pregunta cuidadosamente y seleccione la o las respuestas correctas. Recuerde que puede contestar de manera individualizada y no necesita seguir el orden pre establecido en el examen</li>
+                <li><strong>Botón "Corregir Evaluación":</strong> Antes de que el tiempo se agote, presiona el botón "Corregir Evaluación" para finalizar y revisar tus respuestas.</li>
+                <li><strong>Tiempo Agotado:</strong> Si el tiempo se agota antes de que presiones "Corregir Evaluación", la página se bloqueará automáticamente.</li>
+            </ol>
         </section>
-    </div>
 
+        <!-- Sección de Recomendaciones -->
+        <section class="section recommendations">
+            <h2>Recomendaciones</h2>
+            <ul>
+                <li>No resuelva con prisas, asegúrese de responder correctamente.</li>
+                <li>Una vez que se responda a una pregunta quedará bloqueada, por lo que no se precipite</li>
+                <li>No recargue la página mientras realiza el examen.</li>
+                <li>Apóyese en el mapa de la segunda pantalla.</li>
+            </ul>
+        </section>
 
-    <!-- Modal para la contraseña -->
-    <div class="modal" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="passwordModalLabel">Introduzca la contraseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="password" id="passwordInput" class="form-control" placeholder="Contraseña">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="checkPassword()">Enviar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Botón para Iniciar el Examen -->
+        <section class="section start">
+            <h2>¿Listo para comenzar?</h2>
+            <button id="startExamButton" class="btn">Iniciar Examen</button>
+        </section>
+    </main>
 
-    <!-- Scripts JS -->
-    <script>
-        function finishExam() {
-            if (confirm('¿Estás seguro de que deseas finalizar el examen?')) {
-                window.location.href = 'https://www.cugc.es/component/users/?view=login&Itemid=594';
-            } else {
-                console.log('Usuario canceló.');
-            }
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <footer class="footer">
+        <p>&copy; 2024 Examen de Mando y Control. Todos los derechos reservados.</p>
+    </footer>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script src="scriptforms.js"></script>
-    <script src="styleforms.css"></script>
-    <script src="printReports.js"></script>
-    <script src="scriptchart.js"></script>
-
-    <script src="RespuestasRecojerMostrar.js"></script>
-    <script src="cuentaAtras.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap JS -->
-
-
-
+    <script src="landingPage.js"></script> <!-- Vincula tu archivo JavaScript -->
 </body>
-
 </html>
