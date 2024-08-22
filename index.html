@@ -36,8 +36,8 @@
 
 
     <!-- Cuenta Regresiva -->
-    <div id="cuentaRegresivaContainer" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
-        <div id="cuentaRegresiva" class="display-4 text-center mb-4">15:00</div>
+    <div id="cuentaRegresivaContainer" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+        <div id="cuentaRegresiva" class="display-2 text-center mb-4">15:00</div>
         <div class="d-flex justify-content-center gap-2">
             <button id="iniciarCuentaRegresiva" class="btn btn-iconCuenta">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -48,6 +48,8 @@
             </button>
         </div>
     </div>
+
+
 
     <!-- Contenedor de las tarjetas -->
     <div class="cards-container" style="margin-left: 10%; margin-right: 10%;">
@@ -190,7 +192,7 @@
             <button type="button" class="btn btn-info mx-2" id="showAnswersButton" style="display: none;"
                 onclick="toggleSelectedAnswersDisplay()">Mis respuestas</button>
             <button type="button" class="btn btn-success mx-2" id="printAnswersButton" style="display: none;"
-                onclick="printAnswers()">Imprimir Respuestas</button>
+                onclick="printAnswers()">Imprimir Respuestas Seleccionadas</button>
             <button type="button" class="btn btn-danger mx-2" id="consolidateButton" style="display: none;"
                 onclick="validatePassword()">Corregir Evaluación</button>
         </div>
@@ -203,7 +205,7 @@
     <section id="SeccionTitulo" class="text-center my-4">
         <p class="fs-1">Resultados de la práctica</p>
     </section>
-    
+
     <!-- Contenedor para mostrar las respuestas seleccionadas y correctas -->
     <div id="resultsSection" style="display: none;">
         <section id="SeccionGrande1" class="d-flex justify-content-between align-items-start flex-wrap">

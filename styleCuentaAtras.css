@@ -1,12 +1,20 @@
+#cuentaRegresivaContainer {
+    position: fixed;
+    top: 20px; /* Aumenta el margen superior */
+    right: 20px; /* Aumenta el margen derecho */
+    z-index: 1000;
+}
+
 #cuentaRegresiva {
-    font-size: 4rem;
+    font-size: 2rem; /* Tamaño grande por defecto */
     font-family: 'Digital', sans-serif;
     color: #3d3d3d;
+    margin-bottom: 1.5rem; /* Aumenta el margen inferior */
 }
 
 .btn-iconCuenta {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -25,13 +33,15 @@
 }
 
 #iniciarCuentaRegresiva {
-    background-color: #f7b5a9; /* Verde al hacer hover */
+    background-color: #f7b5a9; /* Color inicial del botón */
 }
+
 #iniciarCuentaRegresiva:hover {
-    background-color: #a73b28; /* Verde al hacer hover */
+    background-color: #a73b28; /* Color al hacer hover */
     transform: scale(1.1);
 }
 
+/* Aumentar tamaño del botón y ajustar la fuente en pantallas pequeñas */
 @media screen and (min-width: 480px) {
     .btn-iconCuenta {
         width: 40px;
@@ -39,8 +49,17 @@
     }
 }
 
+/* Ajustes en pantallas medianas y grandes */
 @media screen and (min-width: 768px) {
     #cuentaRegresiva {
-        font-size: 2rem;
+        font-size: 3rem; /* Reduce el tamaño de la fuente en pantallas más grandes */
     }
 }
+
+/* Ajustes en pantallas muy grandes */
+@media screen and (min-width: 1024px) {
+    #cuentaRegresiva {
+        font-size: 4rem; /* Mantén el tamaño de la fuente grande */
+    }
+}
+
