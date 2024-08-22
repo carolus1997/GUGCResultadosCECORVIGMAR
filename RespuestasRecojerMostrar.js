@@ -9,6 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
         'examForm4': ['Detectado barco Nodriza con inmigrantes se activa salvamento y rescate SASEMAR', 'Se informa de activación medios aéreos GC para verificar peligrosidad traficantes', 'Se informa de intervención de unidades GC para detener traficantes de personas']
     };
 
+    // Nombres de las secciones/formularios
+    const formSectionNames = {
+        'examForm1': 'Mando y Control',
+        'examForm2': 'Situación',
+        'examForm3': 'Decisión',
+        'examForm4': 'Comunicación'
+    };
+
     // Función que guarda las respuestas seleccionadas
     function saveSelectedAnswers(formId, selectedAnswers) {
         selectedAnswersByForm[formId] = selectedAnswers;
@@ -32,8 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Iterar a través de las formas y agregar las respuestas correspondientes
         Object.keys(selectedAnswersByForm).forEach(formId => {
+            const sectionName = formSectionNames[formId]; // Obtener el nombre de la sección
             const selectedAnswers = selectedAnswersByForm[formId];
             const correctAnswers = correctAnswersMap[formId];
+
+            // Añadir el nombre de la sección como título en la columna de respuestas seleccionadas
+            const selectedSectionTitle = document.createElement('h5');
+            selectedSectionTitle.textContent = sectionName;
+            selectedSectionTitle.style.color = 'black';  // Asegurar que el título sea visible
+            selectedAnswersContainer.appendChild(selectedSectionTitle);
 
             // Mostrar las respuestas seleccionadas en color negro
             selectedAnswers.forEach(answer => {
@@ -43,14 +58,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedAnswersContainer.appendChild(answerItem);
             });
 
-            // Mostrar las respuestas correctas
+            // Mostrar las respuestas correctas en color verde, sin agregar otro título
             correctAnswers.forEach(answer => {
                 const correctItem = document.createElement('li');
                 correctItem.textContent = answer;
-                correctItem.className = 'text-success';
+                correctItem.className = 'text-success';  // Aplicar clase de éxito para el color verde
                 correctAnswersContainers[formId].appendChild(correctItem);
             });
         });
+
+        // Remover cualquier restricción de altura para asegurar que todo se muestra
+        selectedAnswersContainer.style.maxHeight = 'none';
+        selectedAnswersContainer.style.overflow = 'visible';
 
         // Añadir la clase 'show' para mostrar las respuestas con la transición
         selectedAnswersContainer.classList.add('show');
