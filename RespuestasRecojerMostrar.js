@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Mostrar las respuestas correctas en color verde, sin agregar otro título
             correctAnswers.forEach(answer => {
-                const correctItem = document.createElement('li');
+                const correctItem = document.createElement('ul');
                 correctItem.textContent = answer;
                 correctItem.className = 'text-success';  // Aplicar clase de éxito para el color verde
                 correctAnswersContainers[formId].appendChild(correctItem);

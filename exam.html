@@ -211,20 +211,20 @@
         <section id="SeccionGrande1" class="d-flex justify-content-between align-items-start flex-wrap">
             <div id="div1_1" class="mx-3" style="width: 100%;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
-
+    
                     <!-- Contenedor de respuestas seleccionadas -->
                     <div id="selectedAnswersContainerUnique" class="answer-container" style="width: 48%;">
                         <h2>Respuestas Seleccionadas</h2>
-                        <div id="selectedAnswersContentDisplay" class="selected-answers"></div>
+                        <ul id="selectedAnswersContentDisplay" class="selected-answers"></ul>
                     </div>
-
+    
                     <!-- Contenedor de respuestas correctas -->
                     <div id="correctAnswersContainer" class="correct-answers" style="width: 48%;">
                         <h2>Respuestas Correctas</h2>
                         <div>
                             <h5>Mando y Control</h5>
                             <span class="badge bg-primary float-end" id="scoreMando"></span>
-                            <ul id="answerMando" aria-labelledby="headingMando" class="scorrect-answers"></ul>
+                            <ul id="answerMando" aria-labelledby="headingMando" class="correct-answers"></ul>
                         </div>
                         <div>
                             <h5>Situación</h5>
@@ -239,11 +239,10 @@
                         <div>
                             <h5>Comunicación</h5>
                             <span class="badge bg-primary float-end" id="scoreComunicacion"></span>
-                            <ul id="answerComunicacion" aria-labelledby="headingComunicacion" class="correct-answers">
-                            </ul>
+                            <ul id="answerComunicacion" aria-labelledby="headingComunicacion" class="correct-answers"></ul>
                         </div>
                     </div>
-
+    
                 </div>
                 <br>
                 <div id="percentageDisplay" class="text-center">
@@ -260,7 +259,7 @@
             </div>
         </section>
     </div>
-
+    
 
     <!-- Modal para la contraseña -->
     <div class="modal" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
