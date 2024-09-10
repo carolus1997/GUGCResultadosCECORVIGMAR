@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cards = document.querySelectorAll('.card');
     const formIndicators = document.querySelectorAll('.form-indicator');
     const progressBar = document.getElementById('progressBar');
-    const printAnswersButton = document.getElementById('printAnswersButton');
+    //const printAnswersButton = document.getElementById('printAnswersButton');
     const consolidateButton = document.getElementById('consolidateButton');
     let progressValue = 0; // Valor inicial de la barra de progreso
 
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Si la barra de progreso alcanza el 100%, mostrar los botones
             if (progressValue === 100) {
-                printAnswersButton.style.display = 'inline-block';
+                //printAnswersButton.style.display = 'inline-block';
                 consolidateButton.style.display = 'inline-block';
             }
         });
